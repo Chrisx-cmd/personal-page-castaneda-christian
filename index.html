@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porto - Designer Portfolio</title>
+    <!-- Fuentes de Google: Inter (cuerpo) y Playfair Display (titulares) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #2ea3f2;
+            --dark-text: #1a1b2e;
+            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e0e8f9 100%);
+            --dark-bg: #16172b;
+            --card-bg: #1c1e36;
+            --accent-purple: #9b87f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 80px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--dark-text);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-left: -50px;
+        }
+
+        .logo i {
+            color: var(--primary-blue);
+        }
+
+        .btn-outline {
+            border: 1px solid #777;
+            background: transparent;
+            padding: 8px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--dark-text);
+            color: white;
+            border-color: var(--dark-text);
+        }
+
+        /* --- SECCIÓN HERO --- */
+        .hero-section {
+            display: flex;
+            padding: 40px 80px 80px 80px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .social-sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 30px 15px;
+            border-radius: 40px;
+            gap: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            margin-right: 50px;
+        }
+
+        .social-sidebar span {
+            font-size: 12px;
+            font-weight: 600;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .social-sidebar i {
+            font-size: 16px;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.3s;
+            background: white;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .social-sidebar i:hover { color: var(--primary-blue); }
+
+        .hero-text { flex: 1; }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .hero-text p {
+            font-size: 15px;
+            color: #555;
+            max-width: 350px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(46, 163, 242, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container {
+            position: relative;
+            width: 340px;
+            height: 400px;
+        }
+
+        .frame {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-purple);
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .hello-bubble {
+            position: absolute;
+            top: 40px;
+            left: -40px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--dark-text);
+            z-index: 3;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: rotate(-12deg);
+        }
+
+        /* --- BARRA DE CLIENTES --- */
+        .clients-bar {
+            background: var(--dark-bg);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            padding: 40px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .clients-bar span {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .star-icon {
+            color: var(--accent-purple);
+            font-size: 16px;
+        }
+
+        /* --- SECCIÓN DE SERVICIOS --- */
+        .services-section {
+            background: var(--dark-bg);
+            color: white;
+            padding: 80px 40px 100px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .services-subtitle {
+            color: var(--accent-purple);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .services-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 700;
+        }
+
+        /* Sistema de Grid 6 columnas para lograr 3 arriba y 2 abajo */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .service-card {
+            /* Degradado de fondo para simular el resplandor inferior azul */
+            background: linear-gradient(180deg, var(--card-bg) 40%, #203056 100%);
+            border-radius: 12px;
+            padding: 35px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .span-2 {
+            grid-column: span 2; /* 3 tarjetas en la fila superior (6/2=3) */
+        }
+
+        .span-3 {
+            grid-column: span 3; /* 2 tarjetas en la fila inferior (6/3=2) */
+        }
+
+        .service-card p {
+            color: #a0a4c0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .service-footer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .service-icon {
+            background: rgba(155, 135, 245, 0.15);
+            color: var(--accent-purple);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-section { flex-direction: column; text-align: center; gap: 60px; }
+            .social-sidebar { flex-direction: row; margin: 0; padding: 15px 30px; }
+            .social-sidebar span { writing-mode: horizontal-tb; transform: none; margin: 0 15px 0 0; }
+            .hero-text p { margin: 0 auto 35px auto; }
+            .clients-bar { flex-wrap: wrap; gap: 30px; }
+            .hello-bubble { left: -10px; }
+            
+            /* Ajuste de grid en móviles y tablets */
+            .services-grid { grid-template-columns: 1fr; }
+            .span-2, .span-3 { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#">Designer</a>
+            <a href="#">Services</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="logo">
+            <i class="fa-solid fa-pen-nib"></i> Porto
+        </div>
+        <button class="btn-outline">Get in Touch</button>
+    </nav>
+
+    <!-- Sección Hero Principal -->
+    <main class="hero-section">
+        <div class="social-sidebar">
+            <span>Follow</span>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-linkedin-in"></i>
+            <i class="fa-brands fa-dribbble"></i>
+            <i class="fa-brands fa-instagram"></i>
+        </div>
+
+        <div class="hero-text">
+            <h1>Creative<br>&mdash; Designer</h1>
+            <p>A creative designer with a passion for crafting visual experiences and creative websites.</p>
+            <button class="btn-primary">Contact Me</button>
+        </div>
+
+        <div class="hero-image">
+            <div class="image-container">
+                <div class="frame"></div>
+                <div class="hello-bubble">.HELLO.</div>
+                <!-- Foto desde Unsplash -->
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80](https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80)" alt="Creative Designer Profile">
+            </div>
+        </div>
+    </main>
+
+    <!-- Barra de Clientes (transición al fondo oscuro) -->
+    <section class="clients-bar">
+        <span>Agency</span>
+        <span class="star-icon">✦</span>
+        <span>Company</span>
+        <span class="star-icon">✦</span>
+        <span>Business</span>
+        <span class="star-icon">✦</span>
+        <span>Startup</span>
+        <span class="star-icon">✦</span>
+        <span>Venture</span>
+    </section>
+
+    <!-- Nueva Sección de Servicios (Añadida de imagen.jpg) -->
+    <section class="services-section">
+        <div class="services-header">
+            <span class="services-subtitle">Services</span>
+            <h2 class="services-title">My broad set of services</h2>
+        </div>
+
+        <div class="services-grid">
+            <!-- Fila superior: 3 tarjetas -->
+            <div class="service-card span-2">
+                <p>Lacus adipiscing lectus convallis purus aliquet cursus magnaol dolori montes augue donec cras.</p>
+                <div class="service-footer">
+                    <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+                    Web Design
+                </div>
+            </div>
+
+            <div class="service-card span-2">
+                <p>Lacus adipiscing lectus convallis purus aliquet cursus magnaol dolori montes augue donec cras.</p>
+                <div class="service-footer">
+                    <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    UI/UX Design
+                </div>
+            </div>
+
+            <div class="service-card span-2">
+                <p>Lacus adipiscing lectus convallis purus aliquet cursus magnaol dolori montes augue donec cras.</p>
+                <div class="service-footer">
+                    <div class="service-icon"><i class="fa-solid fa-cube"></i></div>
+                    Product Design
+                </div>
+            </div>
+
+            <!-- Fila inferior: 2 tarjetas -->
+            <div class="service-card span-3">
+                <p>Lacus adipiscing lectus convallis purus aliquet cursus magnaol dolori montes augue donec cras.</p>
+                <div class="service-footer">
+                    <div class="service-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    User Research
+                </div>
+            </div>
+
+            <div class="service-card span-3">
+                <p>Lacus adipiscing lectus convallis purus aliquet cursus magnaol dolori montes augue donec cras.</p>
+                <div class="service-footer">
+                    <div class="service-icon"><i class="fa-solid fa-film"></i></div>
+                    Motion Graphics
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
